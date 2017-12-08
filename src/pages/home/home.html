@@ -1,14 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Tic Tac Toe A.I
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <button ion-button class="button2" color="light" (click)="tick(0)">{{currentState[0]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(1)">{{currentState[1]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(2)">{{currentState[2]}}</button>
+  <hr/>
+  <button ion-button class="button2" color="light" (click)="tick(3)">{{currentState[3]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(4)">{{currentState[4]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(5)">{{currentState[5]}}</button>
+  <hr/>
+  <button ion-button class="button2" color="light" (click)="tick(6)">{{currentState[6]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(7)">{{currentState[7]}}</button>
+  <button ion-button class="button2" color="light" (click)="tick(8)">{{currentState[8]}}</button>
+  <hr/>
+  <h1>{{message}}</h1>
 </ion-content>
