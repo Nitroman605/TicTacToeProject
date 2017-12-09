@@ -3,21 +3,26 @@
     <ion-title>
       Tic Tac Toe A.I
     </ion-title>
+    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button class="button2" color="light" (click)="tick(0)">{{currentState[0]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(1)">{{currentState[1]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(2)">{{currentState[2]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[0] == ' '), 'O':(currentState[0] == 'O') , 'X':(currentState[0] == 'X')}" color="light" (click)="tick(0)">{{currentState[0]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[1] == ' '), 'O':(currentState[1] == 'O') , 'X':(currentState[1] == 'X')}" color="light" (click)="tick(1)">{{currentState[1]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[2] == ' '), 'O':(currentState[2] == 'O') , 'X':(currentState[2] == 'X')}" color="light" (click)="tick(2)">{{currentState[2]}}</button>
   <hr/>
-  <button ion-button class="button2" color="light" (click)="tick(3)">{{currentState[3]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(4)">{{currentState[4]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(5)">{{currentState[5]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[3] == ' '), 'O':(currentState[3] == 'O') , 'X':(currentState[3] == 'X')}" color="light" (click)="tick(3)">{{currentState[3]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[4] == ' '), 'O':(currentState[4] == 'O') , 'X':(currentState[4] == 'X')}" color="light" (click)="tick(4)">{{currentState[4]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[5] == ' '), 'O':(currentState[5] == 'O') , 'X':(currentState[5] == 'X')}" color="light" (click)="tick(5)">{{currentState[5]}}</button>
   <hr/>
-  <button ion-button class="button2" color="light" (click)="tick(6)">{{currentState[6]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(7)">{{currentState[7]}}</button>
-  <button ion-button class="button2" color="light" (click)="tick(8)">{{currentState[8]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[6] == ' '), 'O':(currentState[6] == 'O') , 'X':(currentState[6] == 'X')}" color="light" (click)="tick(6)">{{currentState[6]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[7] == ' '), 'O':(currentState[7] == 'O') , 'X':(currentState[7] == 'X')}" color="light" (click)="tick(7)">{{currentState[7]}}</button>
+  <button ion-button [ngClass]="{'button2' : (currentState[8] == ' '), 'O':(currentState[8] == 'O') , 'X':(currentState[8] == 'X')}" color="light" (click)="tick(8)">{{currentState[8]}}</button>
   <hr/>
   <h1>{{message}}</h1>
+  <button ion-button (click)="restart('player')">Restart With Player Start First</button>
+  <button ion-button (click)="restart('computer')">Restart With Computer Start First</button>
+  <hr/>
+  <button ion-button (click)="changeDiffculty()">Change Difficulty , Current is {{diffculty}}</button>
 </ion-content>
