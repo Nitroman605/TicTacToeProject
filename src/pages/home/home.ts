@@ -57,6 +57,7 @@ export class HomePage {
           // Create all child states (possible computer moves) from each possible 
           // player moves state (We are still inside the player possible move states loop).
           let deepNodes: Node[] =  this.generateNextStates(tmpStates[j].state, 'X');
+          let allDeepNodesLeadToLose:boolean = true;
           //For Each computer state after the possible player next moves state 
           for(let k = 0 ; k < deepNodes.length ; k++){
             /* 
@@ -65,28 +66,28 @@ export class HomePage {
               Computer Moves List --For Each--> Player Moves List --For Each--> Computer Moves List --For Each--> Player Moves List
             */
             let tmpDeepStates =  this.generateNextStates(deepNodes[k].state, 'O');
-            //Number of States That Player Wins
-            //Basically If a computer moves that lead to two possible player win states (with differnet methods) that means
-            //Computer should avoid this move , You can't block two Possible win States (methods) in one move.
-            let numberOfLossStates:number[] = [];   
+            //Basically Check for the each player moves 
+            //if any of them contains a win for a player (lose) we label that deepNode (computer moves of the after next turn)
+            //Computer Moves List [1] --For Each--> Player Moves List [2] --For Each--> Computer Moves List [3]
+            //The Idea to check all [3] if all lead to lose , Then we should avoid [1]
             for(let d = 0 ; d < tmpDeepStates.length ; d++){
-              let winMethod:number = this.isWinWithWayNumber(tmpDeepStates[d].state, 'O');
-              if (winMethod != 0 && numberOfLossStates.indexOf(winMethod) == -1){
-                  //To fix a certain issue where A.I think's this state is bad .
-                  //We should take into account to avoid stupid moves by the player (a move that does not block A.I player)
-                  //So if this state leads to our win , we should ignore the possible player deadlock since probley the state
-                  //generated does not reflect an actual move (Move where player ignores blocking A.I win)
-                  if(!this.hasWinDeep(tmpDeepStates[d].state)){
-                    numberOfLossStates.push(winMethod);
-                  }  
+              if(this.isWin(tmpDeepStates[d].state,'O')){
+                deepNodes[k].isLeadToLose = true;
               }
             }
-            //If Player possible win states (methods , differnet methods of winning) is greater than 1 we should avoid it .
-            if(numberOfLossStates.length > 1){
-              nodes[i].isLeadToLose = true;
+          }
+          //Check if all deep nodes did actually lead to lose
+          //We ignore this if we have a win in the deep node.
+          for(let x = 0 ; x < deepNodes.length ; x++){
+            if(!deepNodes[x].isLeadToLose || this.isWin(deepNodes[x].state ,'X')){
+              allDeepNodesLeadToLose = false;
             }
           }
-
+          //If all lead to lose , then we should avoid this node and 
+          //label it with lead to lose = true;
+          if(allDeepNodesLeadToLose){
+            nodes[i].isLeadToLose = true;
+          }
         }
       }
       
